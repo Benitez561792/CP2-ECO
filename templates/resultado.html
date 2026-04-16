@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eco-Awareness 2026 | Resultado do Cashback</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --c-bg:       #07090d;
+      --c-surface:  #0d1117;
+      --c-panel:    #111820;
+      --c-border:   rgba(99,210,120,.13);
+      --c-border2:  rgba(99,210,120,.06);
+
+      --c-green:    #63d278;
+      --c-green-lo: rgba(99,210,120,.12);
+      --c-teal:     #38d9c0;
+      --c-teal-lo:  rgba(56,217,192,.10);
+      --c-gold:     #f5c842;
+      --c-gold-lo:  rgba(245,200,66,.10);
+      --c-silver:   #9baab8;
+      --c-bronze:   #c8834a;
+      --c-red:      #f07070;
+      --c-red-lo:   rgba(240,112,112,.10);
+
+      --c-text:     #ddeae0;
+      --c-muted:    #5a7a62;
+      --c-dim:      #3a5040;
+
+      --radius-sm:  8px;
+      --radius-md:  14px;
+      --radius-lg:  20px;
+
+      --font-ui:    'Space Grotesk', sans-serif;
+      --font-mono:  'JetBrains Mono', monospace;
+    }
+
+    /* ── RESET ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-ui);
+      background: var(--c-bg);
+      color: var(--c-text);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-image:
+        radial-gradient(ellipse 70% 45% at 5% 0%,  rgba(99,210,120,.06) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 35% at 95% 95%, rgba(56,217,192,.05) 0%, transparent 55%);
+    }
+
+    /* ── HEADER ──────────────────────────────────────────── */
+    .header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(7,9,13,.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--c-border);
+      padding: .9rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem;
+    }
+    .brand { display: flex; align-items: center; gap: .65rem; }
+    .brand-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--c-green), var(--c-teal));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+    }
+    .brand-name { font-size: 1.05rem; font-weight: 700; letter-spacing: -.4px; }
+    .brand-name span { color: var(--c-green); }
+    .back-link {
+      display: inline-flex; align-items: center; gap: .45rem;
+      font-size: .82rem; font-weight: 500; color: var(--c-muted);
+      text-decoration: none; padding: .45rem 1rem;
+      border: 1px solid var(--c-border); border-radius: var(--radius-sm);
+      transition: color .18s, border-color .18s;
+    }
+    .back-link:hover { color: var(--c-text); border-color: rgba(99,210,120,.3); }
+
+    /* ── RESULT BANNER ───────────────────────────────────── */
+    .result-wrap {
+      max-width: 1200px; margin: 2rem auto;
+      padding: 0 2rem;
+    }
+    .result-card {
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap;
+    }
+    .result-success {
+      background: linear-gradient(135deg, rgba(99,210,120,.08), rgba(56,217,192,.05));
+      border: 1px solid rgba(99,210,120,.25);
+    }
+    .result-error {
+      background: var(--c-red-lo);
+      border: 1px solid rgba(240,112,112,.22);
+    }
+    .result-icon { font-size: 2.75rem; flex-shrink: 0; line-height: 1; }
+    .result-body { flex: 1; min-width: 200px; }
+    .result-title {
+      font-size: 1.45rem; font-weight: 700; letter-spacing: -.5px;
+      margin-bottom: .4rem;
+    }
+    .result-success .result-title { color: var(--c-green); }
+    .result-error   .result-title { color: var(--c-red); }
+    .result-msg { font-size: .88rem; color: var(--c-muted); line-height: 1.65; }
+
+    /* tech badges */
+    .tech-tags { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .9rem; }
+    .tech-tag {
+      font-size: .68rem; font-weight: 600; letter-spacing: .04em;
+      padding: .26rem .72rem; border-radius: var(--radius-sm); border: 1px solid;
+    }
+    .tt-oracle  { background: rgba(240,112,112,.07); color: #fca5a5; border-color: rgba(240,112,112,.2); }
+    .tt-cursor  { background: var(--c-green-lo);     color: var(--c-green); border-color: rgba(99,210,120,.22); }
+    .tt-python  { background: var(--c-teal-lo);      color: var(--c-teal);  border-color: rgba(56,217,192,.2); }
+    .tt-commit  { background: var(--c-teal-lo);      color: var(--c-teal);  border-color: rgba(56,217,192,.22); }
+    .tt-rollback{ background: var(--c-red-lo);       color: var(--c-red);   border-color: rgba(240,112,112,.22); }
+
+    /* metrics */
+    .result-metrics {
+      display: flex; gap: 2.5rem; flex-wrap: wrap; flex-shrink: 0;
+    }
+    .metric label {
+      font-size: .67rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--c-muted);
+      display: block; margin-bottom: .3rem;
+    }
+    .metric-val {
+      font-family: var(--font-mono); font-size: 1.65rem; font-weight: 700;
+    }
+    .metric-val-green { color: var(--c-green); }
+    .metric-val-teal  { color: var(--c-teal); }
+
+    /* ── STATS MINI ──────────────────────────────────────── */
+    .mini-stats {
+      max-width: 1200px; margin: 0 auto 1.5rem;
+      padding: 0 2rem;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem;
+    }
+    .mini-stat {
+      background: var(--c-panel);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+    }
+    .mini-stat-label {
+      font-size: .65rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--c-muted); margin-bottom: .4rem;
+    }
+    .mini-stat-val {
+      font-family: var(--font-mono); font-size: 1.35rem; font-weight: 700;
+      color: var(--c-green);
+    }
+
+    /* ── SECTIONS ────────────────────────────────────────── */
+    .sections {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 2rem 3rem;
+      display: grid; gap: 1.5rem;
+    }
+    .card {
+      background: var(--c-panel);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .card-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--c-border);
+      background: rgba(99,210,120,.03);
+    }
+    .card-head-title { font-size: .9rem; font-weight: 700; letter-spacing: -.2px; }
+    .count-pill {
+      font-size: .68rem; font-weight: 600;
+      padding: .2rem .6rem; border-radius: 99px;
+      background: var(--c-green-lo); color: var(--c-green);
+      border: 1px solid rgba(99,210,120,.2);
+    }
+
+    /* ── TABELA ──────────────────────────────────────────── */
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { background: rgba(99,210,120,.03); }
+    th {
+      font-size: .66rem; font-weight: 600; letter-spacing: .09em;
+      text-transform: uppercase; color: var(--c-muted);
+      padding: .82rem 1.25rem; text-align: left;
+      border-bottom: 1px solid var(--c-border);
+    }
+    td {
+      padding: .78rem 1.25rem; font-size: .865rem;
+      border-bottom: 1px solid var(--c-border2);
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: rgba(99,210,120,.02); }
+
+    /* ── BADGES ──────────────────────────────────────────── */
+    .badge {
+      display: inline-flex; align-items: center; gap: .32rem;
+      font-size: .68rem; font-weight: 600;
+      padding: .22rem .6rem; border-radius: 99px;
+    }
+    .badge-gold   { background: var(--c-gold-lo);          color: var(--c-gold);   border: 1px solid rgba(245,200,66,.25); }
+    .badge-silver { background: rgba(155,170,184,.1);       color: var(--c-silver); border: 1px solid rgba(155,170,184,.25); }
+    .badge-bronze { background: rgba(200,131,74,.1);        color: var(--c-bronze); border: 1px solid rgba(200,131,74,.25); }
+    .badge-ativ   { background: var(--c-teal-lo);           color: var(--c-teal);   border: 1px solid rgba(56,217,192,.25); }
+    .badge-vip    { background: var(--c-gold-lo);           color: var(--c-gold);   border: 1px solid rgba(245,200,66,.3); }
+    .badge-padrao { background: rgba(90,122,98,.12);        color: var(--c-muted);  border: 1px solid rgba(90,122,98,.28); }
+
+    .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+    .dot-gold   { background: var(--c-gold); }
+    .dot-silver { background: var(--c-silver); }
+    .dot-bronze { background: var(--c-bronze); }
+
+    .mono       { font-family: var(--font-mono); font-weight: 600; }
+    .text-green { color: var(--c-green); }
+    .text-teal  { color: var(--c-teal); }
+    .text-muted { color: var(--c-muted); font-size: .82rem; }
+    .log-text   { font-family: var(--font-mono); font-size: .75rem; color: var(--c-muted); line-height: 1.65; }
+    .log-id     { font-family: var(--font-mono); font-weight: 700; font-size: .8rem; color: var(--c-teal); }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .mini-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .result-wrap, .sections, .mini-stats { padding-left: 1rem; padding-right: 1rem; }
+      .result-card { flex-direction: column; }
+      .result-metrics { gap: 1.5rem; }
+      .mini-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ──────────────────────────────────────────── -->
+<header class="header">
+  <div class="brand">
+    <div class="brand-icon">🌿</div>
+    <span class="brand-name">Eco<span>Awareness</span></span>
+  </div>
+  <a href="/" class="back-link">&#8592; Voltar ao painel</a>
+</header>
+
+<!-- ── RESULT BANNER ─────────────────────────────────────── -->
+<div class="result-wrap">
+  <div class="result-card {{ 'result-success' if resultado.status == 'SUCESSO' else 'result-error' }}">
+
+    <div class="result-icon">{{ '✅' if resultado.status == 'SUCESSO' else '❌' }}</div>
+
+    <div class="result-body">
+      <h2 class="result-title">
+        {{ 'Cashback processado com sucesso!' if resultado.status == 'SUCESSO' else 'Erro no processamento' }}
+      </h2>
+      <p class="result-msg">{{ resultado.mensagem }}</p>
+      <div class="tech-tags">
+        
+        {% if resultado.status == 'SUCESSO' %}
+        
+        {% else %}
+        
+        {% endif %}
+      </div>
+    </div>
+
+    {% if resultado.status == 'SUCESSO' %}
+    <div class="result-metrics">
+      <div class="metric">
+        <label>Inscrições processadas</label>
+        <div class="metric-val metric-val-teal">{{ resultado.usuarios }}</div>
+      </div>
+      <div class="metric">
+        <label>Total creditado</label>
+        <div class="metric-val metric-val-green">R$ {{ "%.2f"|format(resultado.total) }}</div>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+
+<!-- ── MINI STATS ─────────────────────────────────────────── -->
+{% if stats %}
+<div class="mini-stats">
+  <div class="mini-stat">
+    <div class="mini-stat-label">Usuários</div>
+    <div class="mini-stat-val">{{ stats.get('TOTAL_USUARIOS', 0) }}</div>
+  </div>
+  <div class="mini-stat">
+    <div class="mini-stat-label">Presenças PRESENT</div>
+    <div class="mini-stat-val">{{ stats.get('TOTAL_PRESENT', 0) }}</div>
+  </div>
+  <div class="mini-stat">
+    <div class="mini-stat-label">Volume total</div>
+    <div class="mini-stat-val">R$ {{ "%.0f"|format(stats.get('VOLUME_TOTAL', 0)) }}</div>
+  </div>
+  <div class="mini-stat">
+    <div class="mini-stat-label">Cashback creditado</div>
+    <div class="mini-stat-val">R$ {{ "%.2f"|format(stats.get('CASHBACK_TOTAL_PAGO', 0)) }}</div>
+  </div>
+</div>
+{% endif %}
+
+<!-- ── SECTIONS ──────────────────────────────────────────── -->
+<div class="sections">
+
+  <!-- SALDOS ATUALIZADOS -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-head-title">Saldos atualizados após cashback</span>
+      <span class="count-pill">{{ usuarios|length }} usuários</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Tier</th>
+          <th>Presenças</th>
+          <th>Total pago (PRESENT)</th>
+          <th>Regra aplicada</th>
+          <th>Saldo creditado</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set tier_map = {
+          1: ('Bronze', 'badge-bronze', 'dot-bronze'),
+          2: ('Silver', 'badge-silver', 'dot-silver'),
+          3: ('Gold',   'badge-gold',   'dot-gold')
+        } %}
+        {% for u in usuarios %}
+        {% set t = tier_map.get(u.PRIORIDADE, ('—','','')) %}
+        <tr>
+          <td><strong>{{ u.NOME }}</strong></td>
+          <td>
+            {% if t[1] %}
+            <span class="badge {{ t[1] }}">
+              <span class="dot {{ t[2] }}"></span>{{ t[0] }}
+            </span>
+            {% else %}—{% endif %}
+          </td>
+          <td>
+            <span class="mono">{{ u.QTD_PRESENT or 0 }}</span>
+            <span class="text-muted"> presente(s)</span>
+          </td>
+          <td><span class="mono">R$ {{ "%.2f"|format(u.TOTAL_PAGO or 0) }}</span></td>
+          <td>
+            {% if u.CASHBACK_PCT == 25 %}
+              <span class="badge badge-ativ">Ativista · 25%</span>
+            {% elif u.CASHBACK_PCT == 20 %}
+              <span class="badge badge-vip">Ingresso VIP · 20%</span>
+            {% elif u.CASHBACK_PCT == 10 %}
+              <span class="badge badge-padrao">Taxa Piso · 10%</span>
+            {% else %}
+              <span class="text-muted">—</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if u.SALDO and u.SALDO > 0 %}
+              <span class="mono text-green">R$ {{ "%.2f"|format(u.SALDO) }}</span>
+            {% else %}
+              <span class="text-muted">R$ 0,00</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LOG DE AUDITORIA -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-head-title">Log de auditoria gerado pelo PL/SQL</span>
+      <span class="count-pill">{{ logs|length }} registros</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Log ID</th>
+          <th>Inscrição</th>
+          <th>Detalhamento (regra · presenças · tipo · cashback)</th>
+          <th>Data / Hora</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for log in logs %}
+        <tr>
+          <td><span class="log-id">#{{ log.ID }}</span></td>
+          <td class="text-muted">#{{ log.INSCRICAO_ID }}</td>
+          <td><span class="log-text">{{ log.MOTIVO }}</span></td>
+          <td class="text-muted" style="white-space:nowrap">{{ log.DATA_STR }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="4" style="text-align:center;padding:2.5rem;color:var(--c-muted)">
+            Nenhum log registrado.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eco-Awareness 2026 | Cashback Progressivo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --c-bg:       #07090d;
+      --c-surface:  #0d1117;
+      --c-panel:    #111820;
+      --c-border:   rgba(99,210,120,.13);
+      --c-border2:  rgba(99,210,120,.06);
+
+      --c-green:    #63d278;
+      --c-green-lo: rgba(99,210,120,.12);
+      --c-teal:     #38d9c0;
+      --c-teal-lo:  rgba(56,217,192,.10);
+      --c-gold:     #f5c842;
+      --c-gold-lo:  rgba(245,200,66,.10);
+      --c-silver:   #9baab8;
+      --c-bronze:   #c8834a;
+      --c-red:      #f07070;
+      --c-red-lo:   rgba(240,112,112,.10);
+
+      --c-text:     #ddeae0;
+      --c-muted:    #5a7a62;
+      --c-dim:      #3a5040;
+
+      --radius-sm:  8px;
+      --radius-md:  14px;
+      --radius-lg:  20px;
+
+      --font-ui:    'Space Grotesk', sans-serif;
+      --font-mono:  'JetBrains Mono', monospace;
+    }
+
+    /* ── RESET ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-ui);
+      background: var(--c-bg);
+      color: var(--c-text);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-image:
+        radial-gradient(ellipse 70% 45% at 5% 0%,  rgba(99,210,120,.06) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 35% at 95% 95%, rgba(56,217,192,.05) 0%, transparent 55%);
+    }
+
+    /* ── HEADER ──────────────────────────────────────────── */
+    .header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(7,9,13,.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--c-border);
+      padding: .9rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem;
+    }
+    .brand { display: flex; align-items: center; gap: .65rem; }
+    .brand-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--c-green), var(--c-teal));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px; flex-shrink: 0;
+    }
+    .brand-name {
+      font-size: 1.05rem; font-weight: 700; letter-spacing: -.4px;
+      color: var(--c-text);
+    }
+    .brand-name span { color: var(--c-green); }
+    .header-right { display: flex; align-items: center; gap: .75rem; }
+    .chip {
+      font-size: .68rem; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .28rem .75rem; border-radius: 99px;
+      background: var(--c-green-lo); color: var(--c-green);
+      border: 1px solid rgba(99,210,120,.22);
+    }
+    .chip-teal {
+      background: var(--c-teal-lo); color: var(--c-teal);
+      border-color: rgba(56,217,192,.22);
+    }
+
+    /* ── FLASH ───────────────────────────────────────────── */
+    .flash-zone { max-width: 1200px; margin: 1rem auto 0; padding: 0 2rem; }
+    .flash {
+      padding: .8rem 1.2rem; border-radius: var(--radius-md);
+      font-size: .875rem; margin-bottom: .5rem;
+    }
+    .flash-success { background: var(--c-green-lo); color: var(--c-green); border: 1px solid rgba(99,210,120,.22); }
+    .flash-error   { background: var(--c-red-lo);   color: var(--c-red);   border: 1px solid rgba(240,112,112,.22); }
+
+    /* ── HERO ────────────────────────────────────────────── */
+    .hero {
+      max-width: 1200px; margin: 0 auto;
+      padding: 3rem 2rem 1.5rem;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .72rem; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--c-teal);
+      margin-bottom: 1rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 24px; height: 1px; background: var(--c-teal);
+    }
+    .hero-title {
+      font-size: clamp(1.9rem, 4vw, 2.9rem);
+      font-weight: 700; letter-spacing: -1.2px; line-height: 1.1;
+      margin-bottom: .75rem;
+    }
+    .hero-title em { color: var(--c-green); font-style: normal; }
+    .hero-desc {
+      font-size: .95rem; color: var(--c-muted); max-width: 600px; line-height: 1.75;
+    }
+    .hero-desc strong { color: var(--c-text); }
+
+    /* ── STATS GRID ──────────────────────────────────────── */
+    .stats-grid {
+      max-width: 1200px; margin: 2rem auto;
+      padding: 0 2rem;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+    }
+    .stat {
+      background: var(--c-panel);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.5rem;
+      position: relative; overflow: hidden;
+      transition: border-color .2s, transform .15s;
+    }
+    .stat:hover { border-color: rgba(99,210,120,.28); transform: translateY(-2px); }
+    .stat::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--c-green), var(--c-teal));
+      opacity: 0; transition: opacity .2s;
+    }
+    .stat:hover::after { opacity: 1; }
+    .stat-label {
+      font-size: .68rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--c-muted); margin-bottom: .55rem;
+    }
+    .stat-value {
+      font-family: var(--font-mono); font-size: 1.75rem; font-weight: 700;
+      color: var(--c-green); line-height: 1;
+    }
+    .stat-sub { font-size: .72rem; color: var(--c-dim); margin-top: .4rem; }
+
+    /* ── REGRAS BANNER ───────────────────────────────────── */
+    .rules-bar {
+      max-width: 1200px; margin: 0 auto 1.5rem;
+      padding: 0 2rem;
+    }
+    .rules-inner {
+      background: var(--c-panel);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.5rem;
+      display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap;
+    }
+    .rules-label {
+      font-size: .68rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--c-muted);
+    }
+    .rule-item { display: flex; align-items: center; gap: .5rem; font-size: .82rem; }
+    .rule-pct {
+      font-family: var(--font-mono); font-weight: 700; font-size: 1rem;
+    }
+    .rule-pct-25 { color: var(--c-teal); }
+    .rule-pct-20 { color: var(--c-gold); }
+    .rule-pct-10 { color: var(--c-muted); }
+    .rule-sep { color: var(--c-border); font-size: 1.2rem; }
+
+    /* ── ACTIONS ─────────────────────────────────────────── */
+    .actions {
+      max-width: 1200px; margin: 0 auto 2rem;
+      padding: 0 2rem;
+      display: grid; grid-template-columns: 2fr 1fr; gap: 1rem;
+    }
+    .action-card {
+      background: var(--c-panel);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+    }
+    .action-info h3 {
+      font-size: 1rem; font-weight: 700; margin-bottom: .4rem; letter-spacing: -.3px;
+    }
+    .action-info p { font-size: .82rem; color: var(--c-muted); line-height: 1.6; }
+
+    /* ── BOTÕES ──────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: .55rem;
+      font-family: var(--font-ui); font-weight: 600; font-size: .875rem;
+      padding: .8rem 1.6rem; border-radius: var(--radius-md);
+      border: none; cursor: pointer; white-space: nowrap; text-decoration: none;
+      transition: transform .12s, box-shadow .18s, opacity .15s;
+    }
+    .btn:active { transform: scale(.96); }
+    .btn-primary {
+      background: linear-gradient(135deg, #63d278, #38c96a);
+      color: #07090d;
+      box-shadow: 0 4px 20px rgba(99,210,120,.28);
+    }
+    .btn-primary:hover { box-shadow: 0 6px 28px rgba(99,210,120,.42); opacity: .94; }
+    .btn-ghost {
+      background: transparent; color: var(--c-muted);
+      border: 1px solid var(--c-border);
+    }
+    .btn-ghost:hover { color: var(--c-text); border-color: rgba(99,210,120,.3); }
+
+    /* ── TABELA ──────────────────────────────────────────── */
+    .section {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 2rem 3rem;
+    }
+    .section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .section-title { font-size: .95rem; font-weight: 700; letter-spacing: -.2px; }
+    .count-badge {
+      font-size: .7rem; font-weight: 600;
+      padding: .22rem .65rem; border-radius: 99px;
+      background: var(--c-green-lo); color: var(--c-green);
+      border: 1px solid rgba(99,210,120,.2);
+    }
+    .table-wrap {
+      background: var(--c-panel);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { background: rgba(99,210,120,.04); }
+    th {
+      font-size: .67rem; font-weight: 600; letter-spacing: .09em;
+      text-transform: uppercase; color: var(--c-muted);
+      padding: .85rem 1.25rem; text-align: left;
+      border-bottom: 1px solid var(--c-border);
+    }
+    td {
+      padding: .82rem 1.25rem; font-size: .875rem;
+      border-bottom: 1px solid var(--c-border2);
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr { transition: background .1s; }
+    tbody tr:hover { background: rgba(99,210,120,.025); }
+
+    /* ── BADGES ──────────────────────────────────────────── */
+    .badge {
+      display: inline-flex; align-items: center; gap: .32rem;
+      font-size: .68rem; font-weight: 600;
+      padding: .22rem .6rem; border-radius: 99px;
+    }
+    .badge-gold   { background: var(--c-gold-lo);            color: var(--c-gold);   border: 1px solid rgba(245,200,66,.25); }
+    .badge-silver { background: rgba(155,170,184,.1);         color: var(--c-silver); border: 1px solid rgba(155,170,184,.25); }
+    .badge-bronze { background: rgba(200,131,74,.1);          color: var(--c-bronze); border: 1px solid rgba(200,131,74,.25); }
+    .badge-present{ background: var(--c-green-lo);            color: var(--c-green);  border: 1px solid rgba(99,210,120,.22); }
+    .badge-vip    { background: var(--c-gold-lo);             color: var(--c-gold);   border: 1px solid rgba(245,200,66,.3); }
+    .badge-ativ   { background: var(--c-teal-lo);             color: var(--c-teal);   border: 1px solid rgba(56,217,192,.25); }
+    .badge-padrao { background: rgba(90,122,98,.12);          color: var(--c-muted);  border: 1px solid rgba(90,122,98,.28); }
+
+    .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+    .dot-gold   { background: var(--c-gold); }
+    .dot-silver { background: var(--c-silver); }
+    .dot-bronze { background: var(--c-bronze); }
+
+    .mono { font-family: var(--font-mono); font-weight: 600; }
+    .text-green  { color: var(--c-green); }
+    .text-muted  { color: var(--c-muted); font-size: .82rem; }
+
+    /* ── TECH STACK NOTE ─────────────────────────────────── */
+    .tech-note {
+      max-width: 1200px; margin: 0 auto 2rem;
+      padding: 0 2rem;
+    }
+    .tech-note-inner {
+      background: var(--c-panel);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.5rem;
+      display: flex; align-items: flex-start; gap: 1rem; flex-wrap: wrap;
+    }
+    .tech-note-label {
+      font-size: .68rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--c-muted);
+      padding-top: .1rem; white-space: nowrap;
+    }
+    .tech-tags { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .tech-tag {
+      font-size: .7rem; font-weight: 600; letter-spacing: .04em;
+      padding: .28rem .75rem; border-radius: var(--radius-sm);
+      border: 1px solid;
+    }
+    .tt-oracle  { background: rgba(240,112,112,.07); color: #fca5a5; border-color: rgba(240,112,112,.2); }
+    .tt-cursor  { background: var(--c-green-lo);     color: var(--c-green); border-color: rgba(99,210,120,.22); }
+    .tt-python  { background: rgba(56,217,192,.07);  color: var(--c-teal);  border-color: rgba(56,217,192,.2); }
+    .tt-commit  { background: var(--c-teal-lo);      color: var(--c-teal);  border-color: rgba(56,217,192,.22); }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .actions    { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hero, .stats-grid, .rules-bar, .actions, .section, .tech-note, .flash-zone {
+        padding-left: 1rem; padding-right: 1rem;
+      }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .action-card { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ──────────────────────────────────────────── -->
+<header class="header">
+  <div class="brand">
+    <div class="brand-icon">🌿</div>
+    <span class="brand-name">Eco<span>Awareness</span></span>
+  </div>
+  <div class="header-right">
+    <span class="chip chip-teal">PL/SQL · Cursor Explícito</span>
+    <span class="chip">FIAP · CP2 · 2026</span>
+  </div>
+</header>
+
+<!-- ── FLASH MESSAGES ──────────────────────────────────── -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="flash-zone">
+    {% for cat, msg in messages %}
+    <div class="flash flash-{{ cat }}">{{ msg }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endwith %}
+
+<!-- ── HERO ────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-eyebrow">Programa de Cashback Progressivo</div>
+  <h1 class="hero-title">Recompensas <em>escaláveis</em><br>para ativistas do futuro</h1>
+  <p class="hero-desc">
+
+  </p>
+</section>
+
+<!-- ── STATS ────────────────────────────────────────────── -->
+<div class="stats-grid">
+  <div class="stat">
+    <div class="stat-label">Usuários cadastrados</div>
+    <div class="stat-value">{{ stats.get('TOTAL_USUARIOS', 0) }}</div>
+    
+  </div>
+  <div class="stat">
+    <div class="stat-label">Inscrições PRESENT</div>
+    <div class="stat-value">{{ stats.get('TOTAL_PRESENT', 0) }}</div>
+    <div class="stat-sub">elegíveis ao cashback</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Volume transacionado</div>
+    <div class="stat-value">R$&nbsp;{{ "%.0f"|format(stats.get('VOLUME_TOTAL', 0)) }}</div>
+    <div class="stat-sub">em inscrições PRESENT</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Cashback já creditado</div>
+    <div class="stat-value">R$&nbsp;{{ "%.2f"|format(stats.get('CASHBACK_TOTAL_PAGO', 0)) }}</div>
+    <div class="stat-sub">saldo total nas contas</div>
+  </div>
+</div>
+
+<!-- ── REGRAS ───────────────────────────────────────────── -->
+<div class="rules-bar">
+  <div class="rules-inner">
+    <span class="rules-label">Escalonamento:</span>
+
+    <div class="rule-item">
+      <span class="rule-pct rule-pct-25">25%</span>
+      <span>Ativista exemplar</span>
+      <span class="text-muted">&gt; 3 presenças</span>
+    </div>
+    <span class="rule-sep">·</span>
+    <div class="rule-item">
+      <span class="rule-pct rule-pct-20">20%</span>
+      <span>Ingresso VIP</span>
+      <span class="text-muted">TIPO = 'VIP'</span>
+    </div>
+    <span class="rule-sep">·</span>
+    <div class="rule-item">
+      <span class="rule-pct rule-pct-10">10%</span>
+      <span>Taxa piso</span>
+      <span class="text-muted">demais participantes</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── ACTIONS ──────────────────────────────────────────── -->
+<div class="actions">
+  <div class="action-card">
+    <div class="action-info">
+      <h3>Processar Cashback Progressivo</h3>
+      <p>
+       
+      </p>
+    </div>
+    <form method="POST" action="/processar">
+      <button type="submit" class="btn btn-primary">&#9654; Executar PL/SQL</button>
+    </form>
+  </div>
+
+  <div class="action-card">
+    <div class="action-info">
+      <h3>Reset de demonstração</h3>
+      <p>Zera todos os saldos e limpa os logs de auditoria para uma nova rodada de testes.</p>
+    </div>
+    <form method="POST" action="/reset">
+      <button type="submit" class="btn btn-ghost">&#8635; Resetar dados</button>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- ── TABELA DE USUÁRIOS ────────────────────────────────── -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-title">Usuários &amp; Inscrições</span>
+    <span class="count-badge">{{ usuarios|length }} registros</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nome</th>
+          <th>E-mail</th>
+          <th>Tier</th>
+          <th>Presenças</th>
+          <th>Total pago (PRESENT)</th>
+          <th>Regra / %</th>
+          <th>Saldo atual</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set tier_map = {
+          1: ('Bronze', 'badge-bronze', 'dot-bronze'),
+          2: ('Silver', 'badge-silver', 'dot-silver'),
+          3: ('Gold',   'badge-gold',   'dot-gold')
+        } %}
+        {% for u in usuarios %}
+        {% set t = tier_map.get(u.PRIORIDADE, ('—','','')) %}
+        <tr>
+          <td class="text-muted">{{ u.ID }}</td>
+          <td><strong>{{ u.NOME }}</strong></td>
+          <td class="text-muted">{{ u.EMAIL }}</td>
+          <td>
+            {% if t[1] %}
+            <span class="badge {{ t[1] }}">
+              <span class="dot {{ t[2] }}"></span>{{ t[0] }}
+            </span>
+            {% else %}—{% endif %}
+          </td>
+          <td>
+            {% if u.QTD_PRESENT and u.QTD_PRESENT > 0 %}
+              <span class="badge badge-present">{{ u.QTD_PRESENT }} present{{ 'e' if u.QTD_PRESENT == 1 else 'es' }}</span>
+            {% else %}
+              <span class="text-muted">—</span>
+            {% endif %}
+          </td>
+          <td><span class="mono">R$ {{ "%.2f"|format(u.TOTAL_PAGO or 0) }}</span></td>
+          <td>
+            {% if u.CASHBACK_PCT == 25 %}
+              <span class="badge badge-ativ">Ativista · 25%</span>
+            {% elif u.CASHBACK_PCT == 20 %}
+              <span class="badge badge-vip">VIP · 20%</span>
+            {% elif u.CASHBACK_PCT == 10 %}
+              <span class="badge badge-padrao">Padrão · 10%</span>
+            {% else %}
+              <span class="text-muted">—</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if u.SALDO and u.SALDO > 0 %}
+              <span class="mono text-green">R$ {{ "%.2f"|format(u.SALDO) }}</span>
+            {% else %}
+              <span class="text-muted">R$ 0,00</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="8" style="text-align:center;padding:2.5rem;color:var(--c-muted)">
+            Nenhum usuário encontrado. Verifique a conexão com o Oracle.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</body>
+</html>
